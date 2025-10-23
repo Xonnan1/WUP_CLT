@@ -88,10 +88,6 @@ print(paste('mean = ', mean(my1000$k4),' sd = ',sd(my1000$k4)))
 
 ### In this case the stdev was cut in half because the sample size was four. This is what the central limit theorem says. There are also 5 peaks. They go from FFFF,to FFFM, to FFMM to FMMM and finally MMMM.
 
-
-
-# Now finish by adding blocks with numb being 9, then 16, 25, and 36. be sure to mention how the standard deviation progresses as the sample size changes,
-
 ```{r}
 numb = 9
 Hdata = Homers_data[sample(1:1000,size=numb*1000, replace=T),"kkardashtemp"]
@@ -161,8 +157,25 @@ print(paste('mean = ', mean(my1000$k25),' sd = ',sd(my1000$k25)))
 
 For the sample size of 25 According to the Central Limit Theorem, the graph shows that the mean gets closer to 50 if rounded up, while the standard deviation is decreasing because according to CLT Theorem it is expected to decrease because the sample standard deviation was 42.1016842396574 and when increasing the sample size in this case 25, so when dividing the sample standard deviation by square root of 25, the expected standard deviation will be 8.40649386423909 which is approximately close to the result I got which rounds up or down to 8.5 showing that the graph is getting more symmetrical. 
 
+```{r}
+numb = 36
+Hdata = Homers_data[sample(1:1000,size=numb*1000, replace=T),"kkardashtemp"]
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+my1000$k36 = x.avg
 
 
+p <- ggplot(my1000, aes(x=k36),col=sex) + 
+  geom_density() +
 
+# Add mean line
+ geom_vline(aes(xintercept=mean(k36)),
+            color="blue", linetype="dashed", size=1)
+p + ggtitle("n = 36") +
+  xlab("temperature") + ylab(" density")
 
+print(paste('mean = ', mean(my1000$k36),' sd = ',sd(my1000$k36)))
 
+```
+
+For the sample size of 36 According to the Central Limit Theorem, the graph shows that the mean gets closer to 50 if rounded up, while the standard deviation is decreasing because according to CLT Theorem it is expected to decrease because the sample standard deviation was 42.1016842396574 and when increasing the sample size in this case 36, so when dividing the sample standard deviation by square root of 36, the expected standard deviation will be 7.00937453122412 which is approximately close to the result I got which rounds up or down to 7.0 showing that the graph is getting more symmetrical. 
