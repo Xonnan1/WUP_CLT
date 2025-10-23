@@ -115,6 +115,33 @@ print(paste('mean = ', mean(my1000$k9),' sd = ',sd(my1000$k9)))
 
 For the sample size of 9. According to the Central Limit Theorem, the graph shows that the mean gets closer to 50 if rounded up, while the standard deviation is decreasing because according to CLT Theorem it is expected to decrease because the sample standard deviation was 42.1016842396574 and when increasing the sample size in this case 9, so when dividing the sample standard deviation by square root of 9 it will be 14.1729339110941 which is approximately close to the result I got which rounds up or down to 14 showing that the graph is getting more symmetrical. 
 
+```{r}
+numb = 16
+Hdata = Homers_data[sample(1:1000,size=numb*1000, replace=T),"kkardashtemp"]
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+my1000$k16 = x.avg
+
+
+p <- ggplot(my1000, aes(x=k16),col=sex) + 
+  geom_density() +
+
+# Add mean line
+ geom_vline(aes(xintercept=mean(k16)),
+            color="blue", linetype="dashed", size=1)
+p + ggtitle("n = 16") +
+  xlab("temperature") + ylab(" density")
+
+print(paste('mean = ', mean(my1000$k16),' sd = ',sd(my1000$k16)))
+
+```
+
+For the sample size of 16. According to the Central Limit Theorem, the graph shows that the mean gets closer to 50 if rounded up, while the standard deviation is decreasing because according to CLT Theorem it is expected to decrease because the sample standard deviation was 42.1016842396574 and when increasing the sample size in this case 16, so when dividing the sample standard deviation by square root of 16, the expected standard deviation will be 10.4059122771102 which is approximately close to the result I got which rounds up or down to 10.5 showing that the graph is getting more symmetrical. 
+
+
+
+
+
 
 
 
