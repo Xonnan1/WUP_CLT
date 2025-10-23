@@ -61,6 +61,8 @@ print(paste('mean = ', mean(my1000$k2),' sd = ',sd(my1000$k2)))
 ```
 ## We expect the sample mean to be close to population and the standev to get smaller by the ratio of one to the sample size. In this case 1/sqrt(2)
 
+
+
 ### There are 3 peaks in the density plot. You pick two people you can get MM,MF.FM,or FF. these are all equally likey so the little peak on left is all the FF's while the little peak on the right is all the MM's so the big one in the middle is both the MF and FM in the same bag so-to-speak.  
 
 ```{r}
@@ -86,4 +88,34 @@ print(paste('mean = ', mean(my1000$k4),' sd = ',sd(my1000$k4)))
 
 ### In this case the stdev was cut in half because the sample size was four. This is what the central limit theorem says. There are also 5 peaks. They go from FFFF,to FFFM, to FFMM to FMMM and finally MMMM.
 
+
+
 # Now finish by adding blocks with numb being 9, then 16, 25, and 36. be sure to mention how the standard deviation progresses as the sample size changes,
+
+```{r}
+numb = 9
+Hdata = Homers_data[sample(1:1000,size=numb*1000, replace=T),"kkardashtemp"]
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+my1000$k9 = x.avg
+
+
+p <- ggplot(my1000, aes(x=k9),col=sex) + 
+  geom_density() +
+
+# Add mean line
+ geom_vline(aes(xintercept=mean(k9)),
+            color="blue", linetype="dashed", size=1)
+p + ggtitle("n = 9") +
+  xlab("temperature") + ylab(" density")
+
+print(paste('mean = ', mean(my1000$k9),' sd = ',sd(my1000$k9)))
+
+```
+
+For the sample size of 9. According to the Central Limit Theorem, the graph shows that the mean gets closer to 50 if rounded up, while the standard deviation is decreasing because according to CLT Theorem it is expected to decrease because the sample standard deviation was 42.1016842396574 and when increasing the sample size in this case 9, so when dividing the sample standard deviation by square root of 9 it will be 14.1729339110941 which is approximately close to the result I got which rounds up or down to 14 showing that the graph is getting more symmetrical. 
+
+
+
+
+
